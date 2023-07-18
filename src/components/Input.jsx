@@ -25,26 +25,19 @@ const Input = () => {
     if (img) {
       const storageRef = ref(storage, uuid());
 
-      const uploadTask = uploadBytesResumable(storageRef, img);
-
-      uploadTask.on(
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateDoc(doc(db, "chats", data.chatId), {
-              messages: arrayUnion({
-                id: uuid(),
-                text,
-                senderId: currentUser.uid,
-                date: Timestamp.now(),
-                img: downloadURL,
-              }),
-            });
+      uploadBytesResumable(storageRef, img).then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          await updateDoc(doc(db, "chats", data.chatId), {
+            messages: arrayUnion({
+              id: uuid(),
+              text,
+              senderId: currentUser.uid,
+              date: Timestamp.now(),
+              img: downloadURL,
+            }),
           });
-        }
-      );
+        });
+      });
     } else {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
@@ -74,12 +67,18 @@ const Input = () => {
     setImg(null);
   };
 
+  const handleKeyDown = (e) => {
+    console.log(e.key);
+    e.key === "Enter" && handleSend();
+  };
+
   return (
     <div className="input h-12 p-2.5 bg-white flex items-center justify-between gap-2">
       <input
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => handleKeyDown(e)}
         placeholder="Type something..."
         className="flex-1 border-none outline-none text-darkest text-lg placeholder:text-secondary"
       />

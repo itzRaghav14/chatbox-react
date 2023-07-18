@@ -31,9 +31,10 @@ const Search = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
+        console.log(doc.data());
       });
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
       setErr(true);
     }
   };
@@ -99,7 +100,7 @@ const Search = () => {
         <UserChat
           onClick={handleSelect}
           name={user.displayName}
-          imgUrl={user.photoUrl}
+          imgUrl={user.photoURL}
         />
       )}
     </div>

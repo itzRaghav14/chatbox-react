@@ -49,7 +49,7 @@ const Register = () => {
             await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
           } catch (err) {
-            console.log(err);
+            console.log(err.message);
             setErr(true);
             setLoading(false);
           }
@@ -58,6 +58,7 @@ const Register = () => {
     } catch (err) {
       setErr(true);
       setLoading(false);
+      console.log(err.message);
     }
   };
 
@@ -98,7 +99,7 @@ const Register = () => {
             Sign Up
           </button>
           {err && (
-            <p className="text-center text-red-500">Something went wrong</p>
+            <p className="text-center text-red-500">Something went wrong {err}</p>
           )}
         </form>
         <p className="text-dark text-xs mt-2">
