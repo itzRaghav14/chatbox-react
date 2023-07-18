@@ -19,6 +19,10 @@
 .env.test.local
 .env.production.local
 
+.vscode
+.firebase
+.github
+
 /local
 
 npm-debug.log*
