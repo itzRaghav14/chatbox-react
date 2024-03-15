@@ -2,32 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --gradient: linear-gradient(to top left, #373b44, #4286f4);
+    --background: 235 95.55% 98.48%;
+    --foreground: 235 1.1% 0.96%;
+
+    --muted: 235 1.1% 92.4%;
+    --muted-foreground: 235 0.55% 42.4%;
+
+    --popover: 235 81.2% 92.4%;
+    --popover-foreground: 235 1.1% 1.2%;
+
+    --card: 235 81.2% 92.4%;
+    --card-foreground: 235 1.1% 1.2%;
+
+    --border: 235 6.1% 89.96%;
+    --input: 235 6.1% 89.96%;
+
+    --primary: 235 11% 24%;
+    --primary-foreground: 235 0.22% 92.4%;
+
+    --secondary: 235 0.55% 96.2%;
+    --secondary-foreground: 235 1.6600000000000001% 12.4%;
+
+    --accent: 235 0.55% 96.2%;
+    --accent-foreground: 235 1.6600000000000001% 12.4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --ring: 235 11% 24%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --gradient: linear-gradient(to top left, #2774ae, #002e5d, #002e5d);
+    --background: 219 41.6% 3.36%;
+    --foreground: 219 6.4% 97.1%;
+
+    --muted: 219 32% 12.6%;
+    --muted-foreground: 219 6.4% 54.2%;
+
+    --popover: 219 52.2% 5.46%;
+    --popover-foreground: 219 6.4% 97.1%;
+
+    --card: 219 52.2% 5.46%;
+    --card-foreground: 219 6.4% 97.1%;
+
+    --border: 219 32% 12.6%;
+    --input: 219 32% 12.6%;
+
+    --primary: 219 64% 42%;
+    --primary-foreground: 219 6.4% 97.1%;
+
+    --secondary: 219 32% 12.6%;
+    --secondary-foreground: 219 6.4% 97.1%;
+
+    --accent: 219 32% 12.6%;
+    --accent-foreground: 219 6.4% 97.1%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 219 6.4% 97.1%;
+
+    --ring: 219 64% 42%;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.bg-gradient {
+  background: var(--gradient);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+* {
+  transition: background 0.5s;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
